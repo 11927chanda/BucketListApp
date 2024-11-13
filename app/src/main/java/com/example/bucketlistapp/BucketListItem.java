@@ -23,7 +23,7 @@ import com.example.bucketlistapp.category.Category;
 },
         //makes search  by category id easy
         indices = {
-        @Index(value ="Category_ID")
+        @Index(value ="CATEGORY_ID")
         }
 )
 public class BucketListItem {

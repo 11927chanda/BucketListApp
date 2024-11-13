@@ -8,6 +8,10 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.bucketlistapp.BucketListItem;
+
+import java.util.List;
+
 @Dao
 public interface CategoryDAO {
 
@@ -20,4 +24,6 @@ public interface CategoryDAO {
     void delete(Category category);
     @Query("SELECT * FROM CATEGORY WHERE ID = :id")
     Category findById(int id);
+    @Query("SELECT * FROM `BUCKET LIST`")
+    LiveData<List<Category>>findAll();
 }
