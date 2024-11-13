@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.bucketlistapp.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.bucketlistapp.MainFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_showListFragment"
+            app:destination="@id/showListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.bucketlistapp.login.SignupFragment"
+        android:label="signup_fragment"
+        tools:layout="@layout/signup_fragment" />
+    <fragment
+        android:id="@+id/showListFragment"
+        android:name="com.example.bucketlistapp.ShowListFragment"
+        android:label="show_list_fragment"
+        tools:layout="@layout/show_list_fragment" >
+        <action
+            android:id="@+id/action_showListFragment_to_addListFragment"
+            app:destination="@id/addListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addListFragment"
+        android:name="com.example.bucketlistapp.AddListFragment"
+        android:label="add_list_fragment"
+        tools:layout="@layout/add_list_fragment" >
+        <action
+            android:id="@+id/action_addListFragment_to_showListFragment"
+            app:destination="@id/showListFragment"
+            app:popUpTo="@id/showListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
