@@ -32,7 +32,14 @@
         android:id="@+id/signupFragment"
         android:name="com.example.bucketlistapp.login.SignupFragment"
         android:label="signup_fragment"
-        tools:layout="@layout/signup_fragment" />
+        tools:layout="@layout/signup_fragment" >
+        <action
+            android:id="@+id/action_signupFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/showListFragment"
         android:name="com.example.bucketlistapp.ShowListFragment"

@@ -23,6 +23,7 @@ public class LoginFragment extends Fragment {
     private LoginFragmentBinding binding;
 
     public static LoginFragment newInstance() {
+
         return new LoginFragment();
     }
 
@@ -51,6 +52,15 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 NavController navController = Navigation.findNavController(view);
                 navController.navigate(R.id.action_loginFragment_to_mainFragment);
+            }
+        });
+
+        binding.signUpLink.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_loginFragment_to_signupFragment);
+
             }
         });
     }
