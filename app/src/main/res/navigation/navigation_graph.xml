@@ -17,7 +17,9 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            app:destination="@id/signupFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -53,11 +55,5 @@
         android:id="@+id/addListFragment"
         android:name="com.example.bucketlistapp.AddListFragment"
         android:label="add_list_fragment"
-        tools:layout="@layout/add_list_fragment" >
-        <action
-            android:id="@+id/action_addListFragment_to_showListFragment"
-            app:destination="@id/showListFragment"
-            app:popUpTo="@id/showListFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/add_list_fragment" />
 </navigation>

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.bucketlistapp.R;
 import com.example.bucketlistapp.databinding.LoginFragmentBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 public class LoginFragment extends Fragment {
 
@@ -46,10 +47,32 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mViewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
+
         //navigate to main page
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String email =binding.loginEmailTIL.getEditText().getText().toString();
+                String password = binding.loginPasswordTIL.getEditText().getText().toString();
+                if(email.isBlank()){
+                    Snackbar.make(view, "Email cannot be empty", Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+                if(password.isBlank()){
+                    Snackbar.make(view, "Password cannot be empty", Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+                try{
+                    mViewModel.validateCredential(email, password);
+                }catch(UserNotFoundException e){
+                    Snackbar.make(view, "User does not exist", Snackbar.LENGTH_LONG).show();
+                    return;
+                }catch(WrongPasswordException e){
+                    Snackbar.make(view, "Wrong Password", Snackbar.LENGTH_LONG).show();
+                    return;
+                }
                 NavController navController = Navigation.findNavController(view);
                 navController.navigate(R.id.action_loginFragment_to_mainFragment);
             }

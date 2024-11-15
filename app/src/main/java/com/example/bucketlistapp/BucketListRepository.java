@@ -32,7 +32,7 @@ public class BucketListRepository {
 
     }
     //method to deal with users
-    public void insert(User user){
+    public  void insert(User user){
         BucketListRoomDatabase.databaseWriteExecutor.execute(()->{
             userDAO.insert(user);
                 });
