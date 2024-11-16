@@ -1,4 +1,4 @@
-package com.example.bucketlistapp;
+package com.example.bucketlistapp.database;
 
 import androidx.room.TypeConverter;
 

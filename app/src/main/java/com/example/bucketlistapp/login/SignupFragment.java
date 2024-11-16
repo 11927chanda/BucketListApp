@@ -83,7 +83,7 @@ public class SignupFragment extends Fragment {
                 if(loginViewModel.userExists(user)){
                     Snackbar.make(view,"User already exists", Snackbar.LENGTH_LONG).show();
                 }
-                //loginViewModel.registerUser(user);
+                loginViewModel.registerUser(user);
 
 
                 NavController navController = Navigation.findNavController(view);

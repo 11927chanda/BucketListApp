@@ -29,6 +29,11 @@
         <action
             android:id="@+id/action_mainFragment_to_showListFragment"
             app:destination="@id/showListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_addCategoryFragment"
+            app:destination="@id/addCategoryFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -53,7 +58,12 @@
     </fragment>
     <fragment
         android:id="@+id/addListFragment"
-        android:name="com.example.bucketlistapp.AddListFragment"
+        android:name="com.example.bucketlistapp.bucketlist.add.AddListFragment"
         android:label="add_list_fragment"
         tools:layout="@layout/add_list_fragment" />
+    <fragment
+        android:id="@+id/addCategoryFragment"
+        android:name="com.example.bucketlistapp.category.AddCategoryFragment"
+        android:label="add_category_fragment"
+        tools:layout="@layout/add_category_fragment" />
 </navigation>

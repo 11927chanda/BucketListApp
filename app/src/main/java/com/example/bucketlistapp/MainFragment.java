@@ -75,6 +75,13 @@ public class MainFragment extends Fragment {
 
             }
         });
+        binding.addCategoryFButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_mainFragment_to_addCategoryFragment);
+            }
+        });
 
     }
 }

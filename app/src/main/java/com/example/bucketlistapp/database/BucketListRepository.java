@@ -1,9 +1,13 @@
-package com.example.bucketlistapp;
+package com.example.bucketlistapp.database;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.bucketlistapp.BucketListItem;
+import com.example.bucketlistapp.BucketListItemDAO;
+import com.example.bucketlistapp.User;
+import com.example.bucketlistapp.UserDAO;
 import com.example.bucketlistapp.category.Category;
 import com.example.bucketlistapp.category.CategoryDAO;
 
@@ -13,8 +17,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class BucketListRepository {
-    private  BucketListItemDAO bucketListItemDAO;
-    private   UserDAO userDAO;
+    private BucketListItemDAO bucketListItemDAO;
+    private UserDAO userDAO;
     private  CategoryDAO categoryDAO;
     private User user;
     private Category category;

@@ -1,4 +1,4 @@
-package com.example.bucketlistapp;
+package com.example.bucketlistapp.database;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,6 +10,10 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.bucketlistapp.BucketListItem;
+import com.example.bucketlistapp.BucketListItemDAO;
+import com.example.bucketlistapp.User;
+import com.example.bucketlistapp.UserDAO;
 import com.example.bucketlistapp.category.Category;
 import com.example.bucketlistapp.category.CategoryDAO;
 
@@ -25,7 +29,7 @@ public abstract class BucketListRoomDatabase extends RoomDatabase{
 
     //DAO's section
     public abstract BucketListItemDAO bucketListItemDAO();
-    public abstract  UserDAO userDAO();
+    public abstract UserDAO userDAO();
     public abstract CategoryDAO categoryDAO();
 
     //The volatile keyword ensures that updates to a variable are propagated prectictably to other threads

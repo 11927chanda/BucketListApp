@@ -4,16 +4,15 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.ViewModel;
 
-import com.example.bucketlistapp.BucketListRepository;
+import com.example.bucketlistapp.database.BucketListRepository;
 import com.example.bucketlistapp.User;
 
 // TODO: Implement the ViewModel
 public class LoginViewModel extends AndroidViewModel {
     //business model
     private User loggedInUser;
-    private BucketListRepository bucketListRepository;
+    private final BucketListRepository bucketListRepository;
     public LoginViewModel(@NonNull Application application) {
         super(application);
 
@@ -23,9 +22,10 @@ public class LoginViewModel extends AndroidViewModel {
     public User getLoggedInUser(){
         return loggedInUser;
     }
-//    public void insert(User user){
-//        BucketListRepository.insert(user);
-//    }
+
+    public void insert(User user){
+        bucketListRepository.insert(user);
+    }
 
    public void validateCredential(String email, String password) throws UserNotFoundException, WrongPasswordException{
        //findUserByEmail
@@ -59,9 +59,9 @@ public class LoginViewModel extends AndroidViewModel {
         return  exists;
    }
 
-//   public void registerUser(User user){
-//        insert(user);
-//        loggedInUser = user;
-//   }
+   public void registerUser(User user){
+        insert(user);
+        loggedInUser = user;
+   }
 
 }
