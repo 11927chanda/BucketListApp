@@ -22,11 +22,11 @@ public interface BucketListItemDAO {
     void delete(BucketListItem bucketListItem);
 
     //display all list to user
-    @Query("SELECT * FROM `BUCKET LIST`")
+    @Query("SELECT * FROM `BUCKETLIST`")
     LiveData<List<BucketListItem>>findAll();
-    @Query("SELECT * FROM `BUCKET LIST` WHERE ID= :id")
+    @Query("SELECT * FROM `BUCKETLIST` WHERE ID= :id")
     BucketListItem findById(Integer id);
 
-    @Query("SELECT * FROM `BUCKET LIST` WHERE TITLE= :title")
+    @Query("SELECT * FROM `BUCKETLIST` WHERE TITLE= :title")
     BucketListItem findById(String title);
 }

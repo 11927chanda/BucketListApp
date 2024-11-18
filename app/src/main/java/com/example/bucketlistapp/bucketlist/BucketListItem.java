@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey;
 import com.example.bucketlistapp.category.Category;
 
 
-@Entity(tableName= "BUCKET LIST",
+@Entity(tableName= "BUCKETLIST",
     foreignKeys = {
         @ForeignKey(entity = Category.class,
             parentColumns = "ID",
@@ -38,11 +38,11 @@ public class BucketListItem {
     @ColumnInfo(name="LAST_UPDATE")
     private Date lastUpdated;
     @ColumnInfo(name="STATUS")
-    private Boolean status;
+    private String status;
     @ColumnInfo(name="BUDGET")
     private Double budget;
     @ColumnInfo(name="PRIORITY_LVL")
-    private Integer priorityLvl;
+    private Integer priorityLvl = 0;
     @ColumnInfo(name="CATEGORY_ID")
     private Integer categoryId;
 
@@ -50,7 +50,7 @@ public class BucketListItem {
     public BucketListItem() {
     }
 
-    public BucketListItem(String title, String description, Date lastUpdated, Boolean status, Double budget, Integer priorityLvl, Integer categoryId) {
+    public BucketListItem(String title, String description, Date lastUpdated, String status, Double budget, Integer priorityLvl, Integer categoryId) {
         this.title = title;
         this.description = description;
         this.lastUpdated = lastUpdated;
@@ -92,11 +92,11 @@ public class BucketListItem {
         this.lastUpdated = lastUpdated;
     }
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

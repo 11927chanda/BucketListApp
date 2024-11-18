@@ -5,15 +5,25 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bucketlistapp.R;
+import com.example.bucketlistapp.ShowCategoryViewModel;
+import com.example.bucketlistapp.ShowListItemViewAdapter;
+import com.example.bucketlistapp.ShowListItemViewHolder;
+import com.example.bucketlistapp.ShowListItemViewModel;
+import com.example.bucketlistapp.bucketlist.BucketListItem;
 import com.example.bucketlistapp.databinding.ShowListFragmentBinding;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +53,8 @@ public class ShowListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ShowListItemViewModel showListItemViewModel = new ViewModelProvider(this).get(ShowListItemViewModel.class);
+
         //navigate to add List fragment
         binding.addNewItemFAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +63,22 @@ public class ShowListFragment extends Fragment {
                 navController.navigate(R.id.action_showListFragment_to_addListFragment);
             }
         });
+        //Recycler view
+        binding.showListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.showListRecyclerView.setHasFixedSize(true);
+        //create adapter
+        ShowListItemViewAdapter adapter = new ShowListItemViewAdapter();
+        //set it to recyclerView
+        binding.showListRecyclerView.setAdapter(adapter);
+        //get an observer and set it
+        final Observer<List<BucketListItem>> allBucketListItemObserver = new Observer<List<BucketListItem>>() {
+            @Override
+            public void onChanged(List<BucketListItem> bucketListItems) {
+                adapter.submitList(bucketListItems);
+            }
+        };
+        //make LiveData observer for changes
+        showListItemViewModel.getAllListItems().observe(getViewLifecycleOwner(), allBucketListItemObserver);
     }
 
     @Override

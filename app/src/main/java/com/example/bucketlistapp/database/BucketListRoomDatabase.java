@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {BucketListItem.class, User.class, Category.class},
-    version = 2, exportSchema = false
+    version = 3, exportSchema = false
 )
 @TypeConverters({Converters.class})
 public abstract class BucketListRoomDatabase extends RoomDatabase{
@@ -41,6 +41,12 @@ public abstract class BucketListRoomDatabase extends RoomDatabase{
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase supportSQLiteDatabase) {
             supportSQLiteDatabase.execSQL("ALTER TABLE CATEGORY ADD COLUMN imageCategory TEXT");
+        }
+    };
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase supportSQLiteDatabase) {
+            supportSQLiteDatabase.execSQL("ALTER TABLE BUCKETLIST ADD COLUMN status TEXT DEFAULT 'Pending'");
         }
     };
 
@@ -83,7 +89,7 @@ public abstract class BucketListRoomDatabase extends RoomDatabase{
 
             BucketListItemDAO bucketListItemDao = instance.bucketListItemDAO();
             //insert new item
-            BucketListItem bucketListItem1 = new BucketListItem("Japan","cherry blossom in japan",new Date(), true, 33.3, 3, category1.getId());
+            BucketListItem bucketListItem1 = new BucketListItem("Japan","cherry blossom in japan",new Date(), "pending", 33.3, 3, category1.getId());
             Long bucketListItem1Id = bucketListItemDao.insert(bucketListItem1);
 
         });

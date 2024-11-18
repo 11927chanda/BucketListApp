@@ -105,6 +105,7 @@ public class MainFragment extends Fragment {
             }
         };
         //make LiveData observer for changes
+        showCategoryViewModel.getAllCategory().observe(getViewLifecycleOwner(), allCategoryObserver);
 
 
     }
