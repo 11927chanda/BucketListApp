@@ -10,6 +10,8 @@ public class Category {
     private Integer id;
     @ColumnInfo(name= "CATEGORY_NAME")
     private String categoryName;
+    @ColumnInfo(name= "CATEGORY_IMAGE")
+    private String imageCategory;
 
     @Ignore
     public Category() {
@@ -35,6 +37,14 @@ public class Category {
         this.categoryName = categoryName;
     }
 
+    public String getImageCategory() {
+        return imageCategory;
+    }
+
+    public void setImageCategory(String imageCategory) {
+        this.imageCategory = imageCategory;
+    }
+
     @Override
     public String toString() {
         return "Category{" +
@@ -42,5 +52,6 @@ public class Category {
                 ", categoryName='" + categoryName + '\'' +
                 '}';
     }
+
 }
 

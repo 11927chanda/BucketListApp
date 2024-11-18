@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/showListFragment"
-        android:name="com.example.bucketlistapp.ShowListFragment"
+        android:name="com.example.bucketlistapp.bucketlist.show.ShowListFragment"
         android:label="show_list_fragment"
         tools:layout="@layout/show_list_fragment" >
         <action

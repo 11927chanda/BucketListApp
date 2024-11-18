@@ -4,8 +4,8 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.bucketlistapp.BucketListItem;
-import com.example.bucketlistapp.BucketListItemDAO;
+import com.example.bucketlistapp.bucketlist.BucketListItem;
+import com.example.bucketlistapp.bucketlist.BucketListItemDAO;
 import com.example.bucketlistapp.User;
 import com.example.bucketlistapp.UserDAO;
 import com.example.bucketlistapp.category.Category;

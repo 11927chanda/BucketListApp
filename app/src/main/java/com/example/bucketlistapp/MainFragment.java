@@ -1,5 +1,6 @@
 package com.example.bucketlistapp;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -9,13 +10,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 
+import com.example.bucketlistapp.category.Category;
 import com.example.bucketlistapp.databinding.MainFragmentBinding;
+
+import java.util.List;
 
 public class MainFragment extends Fragment {
 
@@ -47,6 +52,8 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ShowCategoryViewModel showCategoryViewModel =new ViewModelProvider(this).get(ShowCategoryViewModel.class);
         //safe to code using UI
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
@@ -82,6 +89,23 @@ public class MainFragment extends Fragment {
                 navController.navigate(R.id.action_mainFragment_to_addCategoryFragment);
             }
         });
+        //recycler view
+        binding.categoryRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        binding.categoryRecyclerView.setHasFixedSize(true);
+        //create the adapter
+        CategoryRecyclerViewAdapter adapter = new CategoryRecyclerViewAdapter();
+        //set it to recycler view
+        binding.categoryRecyclerView.setAdapter(adapter);
+
+        //get an observer and set it
+        final Observer<List<Category>> allCategoryObserver = new Observer<List<Category>>() {
+            @Override
+            public void onChanged(List<Category> categoryList) {
+                adapter.submitList(categoryList);
+            }
+        };
+        //make LiveData observer for changes
+
 
     }
 }
