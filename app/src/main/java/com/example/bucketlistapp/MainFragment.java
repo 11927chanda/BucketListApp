@@ -65,23 +65,6 @@ public class MainFragment extends Fragment {
             }
         });
 
-        //for seek bar
-        binding.setPrioritySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                priorityLevel = i;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
         binding.addCategoryFButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

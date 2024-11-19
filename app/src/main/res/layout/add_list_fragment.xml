@@ -130,7 +130,7 @@
             app:layout_constraintTop_toBottomOf="@+id/StatusSpinner" />
 
         <SeekBar
-            android:id="@+id/seekBar2"
+            android:id="@+id/prioritySeekbar"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

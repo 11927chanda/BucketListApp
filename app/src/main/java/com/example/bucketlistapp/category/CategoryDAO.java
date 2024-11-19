@@ -22,6 +22,6 @@ public interface CategoryDAO {
     void delete(Category category);
     @Query("SELECT * FROM CATEGORY WHERE ID = :id")
     Category findById(int id);
-    @Query("SELECT * FROM `BUCKET LIST`")
+    @Query("SELECT * FROM `BUCKETLIST`")
     LiveData<List<Category>>findAll();
 }

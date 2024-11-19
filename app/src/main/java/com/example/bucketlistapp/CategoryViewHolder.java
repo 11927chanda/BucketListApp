@@ -1,19 +1,16 @@
 package com.example.bucketlistapp;
 
-import android.view.View;
-import android.widget.GridView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bucketlistapp.category.Category;
-import com.example.bucketlistapp.databinding.CategoryGridViewItemBinding;
+import com.example.bucketlistapp.databinding.CategoryRecyclerViewItemBinding;
 
 public class CategoryViewHolder extends RecyclerView.ViewHolder {
 
-    private CategoryGridViewItemBinding binding;
+    private CategoryRecyclerViewItemBinding binding;
 
-    public CategoryViewHolder(@NonNull CategoryGridViewItemBinding binding) {
+    public CategoryViewHolder(@NonNull CategoryRecyclerViewItemBinding binding) {
         super(binding.getRoot());
         this.binding = binding;
     }

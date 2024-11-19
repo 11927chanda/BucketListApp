@@ -21,7 +21,7 @@ public class ShowListItemViewAdapter extends ListAdapter<BucketListItem, ShowLis
     private static final DiffUtil.ItemCallback<BucketListItem> DIFF_CALLBACK = new DiffUtil.ItemCallback<BucketListItem>() {
         @Override
         public boolean areItemsTheSame(@NonNull BucketListItem oldItem, @NonNull BucketListItem newItem) {
-            return oldItem.getId().equals(newItem.getId());;
+            return oldItem.getId().equals(newItem.getId());
         }
 
         @Override

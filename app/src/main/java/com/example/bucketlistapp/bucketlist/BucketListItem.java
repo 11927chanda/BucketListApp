@@ -42,7 +42,7 @@ public class BucketListItem {
     @ColumnInfo(name="BUDGET")
     private Double budget;
     @ColumnInfo(name="PRIORITY_LVL")
-    private Integer priorityLvl = 0;
+    private Integer priorityLvl;
     @ColumnInfo(name="CATEGORY_ID")
     private Integer categoryId;
 

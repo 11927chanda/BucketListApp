@@ -85,7 +85,6 @@ public class SignupFragment extends Fragment {
                 }
                 loginViewModel.registerUser(user);
 
-
                 NavController navController = Navigation.findNavController(view);
                 navController.navigate(R.id.action_signupFragment_to_mainFragment);
             }

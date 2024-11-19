@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
 import com.example.bucketlistapp.category.Category;
-import com.example.bucketlistapp.databinding.CategoryGridViewItemBinding;
+import com.example.bucketlistapp.databinding.CategoryRecyclerViewItemBinding;
 
 public class CategoryRecyclerViewAdapter extends ListAdapter<Category, CategoryViewHolder> {
 
-    private CategoryGridViewItemBinding binding;
+    private CategoryRecyclerViewItemBinding binding;
 
     public CategoryRecyclerViewAdapter(){
         super(DIFF_CALLBACK);
@@ -36,7 +36,7 @@ public class CategoryRecyclerViewAdapter extends ListAdapter<Category, CategoryV
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         //inflate the recyclerViewItem
-        binding = CategoryGridViewItemBinding.inflate(inflater, parent, false);
+        binding = CategoryRecyclerViewItemBinding.inflate(inflater, parent, false);
         //Create a new viewholder passing the view binding to it
         CategoryViewHolder categoryViewHolder = new CategoryViewHolder(binding);
         return categoryViewHolder;
