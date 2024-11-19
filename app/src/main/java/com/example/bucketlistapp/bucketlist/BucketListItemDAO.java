@@ -28,5 +28,8 @@ public interface BucketListItemDAO {
     BucketListItem findById(Integer id);
 
     @Query("SELECT * FROM `BUCKETLIST` WHERE TITLE= :title")
-    BucketListItem findById(String title);
+    BucketListItem findByTitle(String title);
+
+    @Query("SELECT * FROM `BUCKETLIST` WHERE CATEGORY_ID= :categoryId")
+    BucketListItem findByCategoryId(int categoryId);
 }

@@ -8,14 +8,17 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
 import com.example.bucketlistapp.category.Category;
+import com.example.bucketlistapp.category.OnCategoryClickListener;
 import com.example.bucketlistapp.databinding.CategoryRecyclerViewItemBinding;
 
 public class CategoryRecyclerViewAdapter extends ListAdapter<Category, CategoryViewHolder> {
 
     private CategoryRecyclerViewItemBinding binding;
+    private OnCategoryClickListener onCategoryClickListener;
 
-    public CategoryRecyclerViewAdapter(){
+    public CategoryRecyclerViewAdapter(OnCategoryClickListener onCategoryClickListener){
         super(DIFF_CALLBACK);
+        this.onCategoryClickListener = onCategoryClickListener;
     }
 
     private static final DiffUtil.ItemCallback<Category>DIFF_CALLBACK = new DiffUtil.ItemCallback<Category>() {
@@ -46,5 +49,6 @@ public class CategoryRecyclerViewAdapter extends ListAdapter<Category, CategoryV
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         Category category = getItem(position);
         holder.update(category);
+        holder.bind(category,onCategoryClickListener);
     }
 }

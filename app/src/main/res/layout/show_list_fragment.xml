@@ -35,7 +35,7 @@
             app:layout_constraintGuide_percent="0.04" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/headingTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -73,7 +73,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/left_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/headingTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

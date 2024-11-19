@@ -3,8 +3,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.io.Serializable;
+
 @Entity(tableName ="CATEGORY")
-public class Category {
+public class Category implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "ID")
     private Integer id;
@@ -50,8 +53,8 @@ public class Category {
         return "Category{" +
                 "id=" + id +
                 ", categoryName='" + categoryName + '\'' +
+                ", imageCategory='" + imageCategory + '\'' +
                 '}';
     }
-
 }
 

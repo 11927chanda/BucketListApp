@@ -2,6 +2,7 @@ package com.example.bucketlistapp.bucketlist;
 
 import static androidx.room.ForeignKey.CASCADE;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import androidx.room.ColumnInfo;
@@ -26,7 +27,7 @@ import com.example.bucketlistapp.category.Category;
         @Index(value ="CATEGORY_ID")
         }
 )
-public class BucketListItem {
+public class BucketListItem implements Serializable {
 
     @PrimaryKey (autoGenerate = true)
     @ColumnInfo(name="ID")

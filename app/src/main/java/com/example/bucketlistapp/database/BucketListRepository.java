@@ -147,5 +147,19 @@ public class BucketListRepository {
         }
         return bucketListItem;
     }
+    public BucketListItem findItemByCategoryId(int categoryId){
+        Callable<BucketListItem> c = ()->{
+            return bucketListItemDAO.findByCategoryId(categoryId);
+        };
+        Future<BucketListItem> future = BucketListRoomDatabase.databaseWriteExecutor.submit(c);
+        try {
+            bucketListItem = future.get();
+        }
+        catch (ExecutionException |InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return bucketListItem;
+    }
+
 
 }

@@ -21,6 +21,7 @@ import com.example.bucketlistapp.ShowListItemViewAdapter;
 import com.example.bucketlistapp.ShowListItemViewHolder;
 import com.example.bucketlistapp.ShowListItemViewModel;
 import com.example.bucketlistapp.bucketlist.BucketListItem;
+import com.example.bucketlistapp.category.Category;
 import com.example.bucketlistapp.databinding.ShowListFragmentBinding;
 
 import java.util.List;
@@ -33,6 +34,7 @@ import java.util.List;
 public class ShowListFragment extends Fragment {
 
     private ShowListFragmentBinding binding;
+    private Category category;
 
     public static ShowListFragment newInstance() {
 
@@ -54,6 +56,18 @@ public class ShowListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ShowListItemViewModel showListItemViewModel = new ViewModelProvider(this).get(ShowListItemViewModel.class);
+
+        //if something has passes something to this Fragment, getArguments will have it
+        Bundle bundle = getArguments();
+        if(bundle != null && bundle.containsKey("BUCKETLIST")){
+            //yoy know the fragment has been opened
+            category = bundle.getSerializable("BUCKETLIST", Category.class);
+
+            BucketListItem bucketListItem = showListItemViewModel.find(category.getId());
+            //for the bucket list item
+            binding.headingTextView.setText(category.getCategoryName());
+
+        }
 
         //navigate to add List fragment
         binding.addNewItemFAB.setOnClickListener(new View.OnClickListener() {

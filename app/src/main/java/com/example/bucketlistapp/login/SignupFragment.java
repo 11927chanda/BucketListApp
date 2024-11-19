@@ -63,11 +63,19 @@ public class SignupFragment extends Fragment {
                     return;
                 }
                 if(email.isBlank()){
-                    Snackbar.make(view, "Insert your last email", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, "Insert your  email", Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+                if(!email.contains("@")||!email.contains(".")){
+                    Snackbar.make(view, "Invalid email", Snackbar.LENGTH_LONG).show();
                     return;
                 }
                 if(password.isBlank()){
-                    Snackbar.make(view, "Insert your last password", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, "Insert your  password", Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+                if(password.length()<8){
+                    Snackbar.make(view, "Password must contain at least 8 characters", Snackbar.LENGTH_LONG).show();
                     return;
                 }
                 if(confirmPassword.isBlank()){

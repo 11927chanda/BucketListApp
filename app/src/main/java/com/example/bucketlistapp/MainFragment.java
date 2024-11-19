@@ -18,11 +18,12 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 
 import com.example.bucketlistapp.category.Category;
+import com.example.bucketlistapp.category.OnCategoryClickListener;
 import com.example.bucketlistapp.databinding.MainFragmentBinding;
 
 import java.util.List;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements OnCategoryClickListener {
 
     private MainViewModel mViewModel;
     private MainFragmentBinding binding;
@@ -57,13 +58,13 @@ public class MainFragment extends Fragment {
         //safe to code using UI
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-        binding.showListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_mainFragment_to_showListFragment);
-            }
-        });
+//        binding.showListButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NavController navController = Navigation.findNavController(v);
+//                navController.navigate(R.id.action_mainFragment_to_showListFragment);
+//            }
+//        });
 
         binding.addCategoryFButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +77,7 @@ public class MainFragment extends Fragment {
         binding.categoryRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.categoryRecyclerView.setHasFixedSize(true);
         //create the adapter
-        CategoryRecyclerViewAdapter adapter = new CategoryRecyclerViewAdapter();
+        CategoryRecyclerViewAdapter adapter = new CategoryRecyclerViewAdapter(this);
         //set it to recycler view
         binding.categoryRecyclerView.setAdapter(adapter);
 
@@ -91,5 +92,10 @@ public class MainFragment extends Fragment {
         showCategoryViewModel.getAllCategory().observe(getViewLifecycleOwner(), allCategoryObserver);
 
 
+    }
+
+    @Override
+    public void onClick(Category category, View view) {
+        //code here whenever clicked for particular category
     }
 }

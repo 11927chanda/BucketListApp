@@ -18,7 +18,12 @@ public class ShowListItemViewModel  extends AndroidViewModel {
         super(application);
         bucketListRepository = new BucketListRepository(application);
     }
+    public BucketListItem find(Integer categoryId) {
+        return bucketListRepository.findItemByCategoryId(categoryId);
+    }
     public LiveData<List<BucketListItem>>getAllListItems(){
         return allListItems;
     }
+
+
 }
