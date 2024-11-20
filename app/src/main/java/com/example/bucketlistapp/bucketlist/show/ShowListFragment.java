@@ -17,24 +17,20 @@ import android.view.ViewGroup;
 
 import com.example.bucketlistapp.R;
 import com.example.bucketlistapp.ShowCategoryViewModel;
-import com.example.bucketlistapp.ShowListItemViewAdapter;
-import com.example.bucketlistapp.ShowListItemViewHolder;
-import com.example.bucketlistapp.ShowListItemViewModel;
 import com.example.bucketlistapp.bucketlist.BucketListItem;
 import com.example.bucketlistapp.category.Category;
 import com.example.bucketlistapp.databinding.ShowListFragmentBinding;
 
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ShowListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ShowListFragment extends Fragment {
+
+    private ShowListItemViewModel showListItemViewModel;
 
     private ShowListFragmentBinding binding;
     private Category category;
+    private ShowCategoryViewModel showCategoryViewModel;
 
     public static ShowListFragment newInstance() {
 
@@ -55,7 +51,7 @@ public class ShowListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ShowListItemViewModel showListItemViewModel = new ViewModelProvider(this).get(ShowListItemViewModel.class);
+         showListItemViewModel = new ViewModelProvider(this).get(ShowListItemViewModel.class);
 
         //if something has passes something to this Fragment, getArguments will have it
         Bundle bundle = getArguments();

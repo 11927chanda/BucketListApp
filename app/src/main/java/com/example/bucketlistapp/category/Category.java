@@ -20,9 +20,11 @@ public class Category implements Serializable {
     public Category() {
     }
 
-    public Category(String categoryName) {
+    public Category(String categoryName,String imageCategory) {
         this.categoryName = categoryName;
+        this.imageCategory = imageCategory;
     }
+
 
     public Integer getId() {
         return id;

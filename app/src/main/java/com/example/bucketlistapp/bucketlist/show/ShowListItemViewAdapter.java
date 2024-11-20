@@ -1,4 +1,4 @@
-package com.example.bucketlistapp;
+package com.example.bucketlistapp.bucketlist.show;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

@@ -83,15 +83,29 @@ public abstract class BucketListRoomDatabase extends RoomDatabase{
             User user1 = userDAO.findByEmail("abc@ait.com");
 
 
-            CategoryDAO categoryDao =instance.categoryDAO();
+            CategoryDAO categoryDAO =instance.categoryDAO();
             //insert new category
-            Category category1= new Category("Travel");
+            Category category1= new Category("Travel","travel.jpg");
+            Long categoryId1 =categoryDAO.insert(category1);
+            Category category2= new Category("Adventure","");
+            Long categoryId2 =categoryDAO.insert(category2);
+            Category category3= new Category("Goal","");
+            Long categoryId3 =categoryDAO.insert(category3);
+
+
+
 
             BucketListItemDAO bucketListItemDao = instance.bucketListItemDAO();
             //insert new item
             BucketListItem bucketListItem1 = new BucketListItem("Japan","cherry blossom in japan",new Date(), "pending", 33.3, 3, category1.getId());
             Long bucketListItem1Id = bucketListItemDao.insert(bucketListItem1);
 
+            BucketListItem bucketListItem2 = new BucketListItem("Japan","cherry blossom in japan",new Date(), "pending", 33.3, 3, 1);
+            Long bucketListItem2Id = bucketListItemDao.insert(bucketListItem2);
+            BucketListItem bucketListItem3 = new BucketListItem("Japan","cherry blossom in japan",new Date(), "pending", 33.3, 3, 2);
+            Long bucketListItem3Id = bucketListItemDao.insert(bucketListItem2);
+
         });
+
     }
 }

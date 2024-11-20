@@ -24,9 +24,16 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
     public void update(Category category){
         this.binding.categoryTitleTextView.setText(category.getCategoryName());
 
-        if(category.getImageCategory().isEmpty()){
+//        if(category.getImageCategory().isEmpty()){
+//            this.binding.categoryImageView.setImageResource(R.drawable.travel);
+//
+//        }
+        if(category.getCategoryName() == null || category
+                .getImageCategory().isEmpty()){
             this.binding.categoryImageView.setImageResource(R.drawable.travel);
-        }else{
+        }
+
+        else{
             int resID = binding.getRoot().getResources().getIdentifier(category.getImageCategory(),"drawable",binding.getRoot().getContext().getPackageName());
             this.binding.categoryImageView.setImageResource(resID);
         }
@@ -35,10 +42,23 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
     public void bind(Category category, OnCategoryClickListener onCategoryClickListener){
 
         binding.categoryMaterialCardview.setOnLongClickListener(new View.OnLongClickListener(){
+
             @Override
             public boolean onLongClick(View v) {
                 binding.categoryMaterialCardview.setChecked(binding.categoryMaterialCardview.isChecked());
                 return true;
+
+            }
+        });
+
+        binding.categoryImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("BUCKETLIST", category);
+
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_mainFragment_to_showListFragment, bundle);
             }
         });
         binding.categoryTitleTextView.setOnClickListener(new View.OnClickListener() {

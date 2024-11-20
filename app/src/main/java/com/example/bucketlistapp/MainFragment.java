@@ -27,7 +27,6 @@ public class MainFragment extends Fragment implements OnCategoryClickListener {
 
     private MainViewModel mViewModel;
     private MainFragmentBinding binding;
-    private Integer priorityLevel = 0;
 
     public static MainFragment newInstance() {
         return new MainFragment();

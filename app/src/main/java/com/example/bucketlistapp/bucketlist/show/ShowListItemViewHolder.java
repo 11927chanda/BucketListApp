@@ -1,4 +1,4 @@
-package com.example.bucketlistapp;
+package com.example.bucketlistapp.bucketlist.show;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
