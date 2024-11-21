@@ -65,23 +65,22 @@
                 android:id="@+id/textView13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:text="Priority Level: "
                 app:layout_constraintBottom_toBottomOf="@+id/showStatusTextView"
-                app:layout_constraintTop_toTopOf="@+id/showStatusTextView"
-                tools:layout_editor_absoluteX="269dp" />
+                app:layout_constraintEnd_toStartOf="@+id/priorityLvlTextView"
+                app:layout_constraintTop_toTopOf="@+id/showStatusTextView" />
 
             <TextView
                 android:id="@+id/priorityLvlTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="1"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView13"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView13"
                 app:layout_constraintTop_toTopOf="@+id/textView13" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

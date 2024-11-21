@@ -17,6 +17,7 @@ public class ShowListItemViewModel  extends AndroidViewModel {
     public ShowListItemViewModel(@NonNull Application application) {
         super(application);
         bucketListRepository = new BucketListRepository(application);
+        allListItems = bucketListRepository.getAllListItems();
     }
     public BucketListItem find(Integer categoryId) {
         return bucketListRepository.findItemByCategoryId(categoryId);
@@ -24,6 +25,4 @@ public class ShowListItemViewModel  extends AndroidViewModel {
     public LiveData<List<BucketListItem>>getAllListItems(){
         return allListItems;
     }
-
-
 }

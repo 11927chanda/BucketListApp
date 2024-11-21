@@ -102,16 +102,20 @@ public class AddListFragment extends Fragment {
                     Snackbar.make(view, "Title cannot be blank", Snackbar.LENGTH_LONG).show();
                     return;
                 }
+                bucketListItem.setTitle(title);
+
                 String description = binding.addDiscriptionTIL.getEditText().getText().toString();
                 if (description.isBlank()) {
                     Snackbar.make(view, "Description cannot be blank", Snackbar.LENGTH_LONG).show();
                     return;
                 }
+                bucketListItem.setDescription(description);
                 String status = binding.StatusSpinner.getSelectedItem().toString();
                 if (status.isBlank()) {
                     Snackbar.make(view, "Status cannot be blank", Snackbar.LENGTH_LONG).show();
                     return;
                 }
+                bucketListItem.setStatus(status);
                 String budgetString = binding.addBudgetTIL.getEditText().getText().toString();
                 if (budgetString.isBlank()) {
                     Snackbar.make(view, "Budget cannot be blank", Snackbar.LENGTH_LONG).show();
@@ -125,6 +129,7 @@ public class AddListFragment extends Fragment {
                     Snackbar.make(view, "Invalid budget value", Snackbar.LENGTH_LONG).show();
                     return;
                 }
+                bucketListItem.setBudget(budget);
 
                 BucketListItem bucketListItem = new BucketListItem();
                 bucketListItem.setId(1);
@@ -136,7 +141,9 @@ public class AddListFragment extends Fragment {
                 bucketListItem.setLastUpdated(new Date(System.currentTimeMillis()));
                 bucketListItem.setCategoryId(1);
 
-
+                mViewModel.insert(bucketListItem);
+                NavController navController = Navigation.findNavController(view);
+                navController.navigateUp();
             }
         });
         binding.cancelListItemButton.setOnClickListener(new View.OnClickListener() {

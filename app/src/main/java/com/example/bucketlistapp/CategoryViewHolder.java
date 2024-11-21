@@ -24,11 +24,8 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
     public void update(Category category){
         this.binding.categoryTitleTextView.setText(category.getCategoryName());
 
-//        if(category.getImageCategory().isEmpty()){
-//            this.binding.categoryImageView.setImageResource(R.drawable.travel);
-//
-//        }
-        if(category.getCategoryName() == null || category
+
+        if(category.getImageCategory() == null || category
                 .getImageCategory().isEmpty()){
             this.binding.categoryImageView.setImageResource(R.drawable.travel);
         }

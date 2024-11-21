@@ -16,11 +16,13 @@ public class AddListFragmentViewModel extends AndroidViewModel {
 
     private final BucketListRepository bucketListRepository;
     private BucketListItem bucketListItem;
-    public AddListFragmentViewModel(@NonNull Application application, BucketListRepository bucketListRepository, BucketListRepository bucketListRepository1, BucketListRepository bucketListRepository2) {
+
+//    public AddListFragmentViewModel(@NonNull Application application, BucketListRepository bucketListRepository, BucketListRepository bucketListRepository1, BucketListRepository bucketListRepository2) {
+    public AddListFragmentViewModel(@NonNull Application application)  {
         super(application);
-        this.bucketListRepository = bucketListRepository2;
-        bucketListItem = new BucketListItem();
-        bucketListRepository = new BucketListRepository(application);
+//        this.bucketListRepository = bucketListRepository;
+//        bucketListItem = new BucketListItem();
+       bucketListRepository = new BucketListRepository(application);
 
         bucketListItem= new BucketListItem();
         bucketListItem.setTitle("");

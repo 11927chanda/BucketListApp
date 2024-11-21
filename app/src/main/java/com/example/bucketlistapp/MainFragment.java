@@ -23,9 +23,10 @@ import com.example.bucketlistapp.databinding.MainFragmentBinding;
 
 import java.util.List;
 
+//This is category Fragment
 public class MainFragment extends Fragment implements OnCategoryClickListener {
 
-    private MainViewModel mViewModel;
+    private ShowCategoryViewModel showCategoryViewModel;
     private MainFragmentBinding binding;
 
     public static MainFragment newInstance() {
@@ -55,16 +56,9 @@ public class MainFragment extends Fragment implements OnCategoryClickListener {
 
         ShowCategoryViewModel showCategoryViewModel =new ViewModelProvider(this).get(ShowCategoryViewModel.class);
         //safe to code using UI
-        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        showCategoryViewModel = new ViewModelProvider(this).get(ShowCategoryViewModel.class);
 
-//        binding.showListButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NavController navController = Navigation.findNavController(v);
-//                navController.navigate(R.id.action_mainFragment_to_showListFragment);
-//            }
-//        });
-
+//
         binding.addCategoryFButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,9 +66,20 @@ public class MainFragment extends Fragment implements OnCategoryClickListener {
                 navController.navigate(R.id.action_mainFragment_to_addCategoryFragment);
             }
         });
+
+        //for navigating to list as clicking on category card is not working
+
+        binding.showListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_mainFragment_to_showListFragment);
+            }
+        });
+
         //recycler view
         binding.categoryRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        binding.categoryRecyclerView.setHasFixedSize(true);
+        binding.categoryRecyclerView.setHasFixedSize(false);
         //create the adapter
         CategoryRecyclerViewAdapter adapter = new CategoryRecyclerViewAdapter(this);
         //set it to recycler view
@@ -87,9 +92,11 @@ public class MainFragment extends Fragment implements OnCategoryClickListener {
                 adapter.submitList(categoryList);
             }
         };
+
+
+
         //make LiveData observer for changes
         showCategoryViewModel.getAllCategory().observe(getViewLifecycleOwner(), allCategoryObserver);
-
 
     }
 
