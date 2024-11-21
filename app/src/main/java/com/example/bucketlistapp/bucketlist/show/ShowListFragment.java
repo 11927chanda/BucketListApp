@@ -20,6 +20,7 @@ import com.example.bucketlistapp.ShowCategoryViewModel;
 import com.example.bucketlistapp.bucketlist.BucketListItem;
 import com.example.bucketlistapp.category.Category;
 import com.example.bucketlistapp.databinding.ShowListFragmentBinding;
+import com.example.bucketlistapp.login.LoginViewModel;
 
 import java.util.List;
 
@@ -52,12 +53,13 @@ public class ShowListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
          showListItemViewModel = new ViewModelProvider(this).get(ShowListItemViewModel.class);
+         LoginViewModel loginViewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
 
         //if something has passes something to this Fragment, getArguments will have it
         Bundle bundle = getArguments();
         if(bundle != null && bundle.containsKey("BUCKETLIST")){
             //yoy know the fragment has been opened
-            category = bundle.getSerializable("BUCKETLIST", Category.class);
+            category = (Category) bundle.get("BUCKETLIST");
 
             BucketListItem bucketListItem = showListItemViewModel.find(category.getId());
             //for the bucket list item
@@ -88,7 +90,8 @@ public class ShowListFragment extends Fragment {
             }
         };
         //make LiveData observer for changes
-        showListItemViewModel.getAllListItems().observe(getViewLifecycleOwner(), allBucketListItemObserver);
+//        showListItemViewModel.getAllListItems().observe(getViewLifecycleOwner(), allBucketListItemObserver);
+        showListItemViewModel.findByUserIdAndCategoryId(Long.valueOf(loginViewModel.getLoggedInUser().getId()), Long.valueOf(category.getId())).observe(getViewLifecycleOwner(), allBucketListItemObserver);
     }
 
     @Override

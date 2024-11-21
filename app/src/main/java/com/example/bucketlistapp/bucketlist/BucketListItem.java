@@ -46,12 +46,14 @@ public class BucketListItem implements Serializable {
     private Integer priorityLvl;
     @ColumnInfo(name="CATEGORY_ID")
     private Integer categoryId;
+    @ColumnInfo(name="USER_ID")
+    private Integer userId;
 
     @Ignore
     public BucketListItem() {
     }
 
-    public BucketListItem(String title, String description, Date lastUpdated, String status, Double budget, Integer priorityLvl, Integer categoryId) {
+    public BucketListItem(String title, String description, Date lastUpdated, String status, Double budget, Integer priorityLvl, Integer categoryId, Integer userId) {
         this.title = title;
         this.description = description;
         this.lastUpdated = lastUpdated;
@@ -59,6 +61,7 @@ public class BucketListItem implements Serializable {
         this.budget = budget;
         this.priorityLvl = priorityLvl;
         this.categoryId = categoryId;
+        this.userId = userId;
     }
 
     public Integer getId() {
@@ -125,6 +128,14 @@ public class BucketListItem implements Serializable {
         this.categoryId = categoryId;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
         return "BucketListItem{" +
@@ -132,10 +143,11 @@ public class BucketListItem implements Serializable {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", lastUpdated=" + lastUpdated +
-                ", status=" + status +
+                ", status='" + status + '\'' +
                 ", budget=" + budget +
                 ", priorityLvl=" + priorityLvl +
-                ", CategoryId=" + categoryId +
+                ", categoryId=" + categoryId +
+                ", userId=" + userId +
                 '}';
     }
 }

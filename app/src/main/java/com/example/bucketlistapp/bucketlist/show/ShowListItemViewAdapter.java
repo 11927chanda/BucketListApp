@@ -32,8 +32,7 @@ public class ShowListItemViewAdapter extends ListAdapter<BucketListItem, ShowLis
                     oldItem.getBudget().equals(newItem.getBudget())&&
                     oldItem.getLastUpdated().equals(newItem.getLastUpdated())&&
                     oldItem.getPriorityLvl().equals(newItem.getPriorityLvl())&&
-                    oldItem.getCategoryId().equals(newItem.getCategoryId())
-                    ;
+                    oldItem.getCategoryId().equals(newItem.getCategoryId());
         }
     };
     @NonNull

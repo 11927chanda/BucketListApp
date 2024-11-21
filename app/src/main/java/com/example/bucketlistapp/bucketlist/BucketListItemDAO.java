@@ -24,6 +24,10 @@ public interface BucketListItemDAO {
     //display all list to user
     @Query("SELECT * FROM `BUCKETLIST`")
     LiveData<List<BucketListItem>>findAll();
+
+    @Query("SELECT * FROM BUCKETLIST WHERE USER_ID = :userId and CATEGORY_ID = :categoryId")
+    LiveData<List<BucketListItem>>findByUserIdAndCategoryId(Long userId, Long categoryId);
+
     @Query("SELECT * FROM `BUCKETLIST` WHERE ID= :id")
     BucketListItem findById(Integer id);
 

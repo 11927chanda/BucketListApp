@@ -37,18 +37,18 @@ public abstract class BucketListRoomDatabase extends RoomDatabase{
     private static volatile BucketListRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
 
-    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-        @Override
-        public void migrate(@NonNull SupportSQLiteDatabase supportSQLiteDatabase) {
-            supportSQLiteDatabase.execSQL("ALTER TABLE CATEGORY ADD COLUMN imageCategory TEXT");
-        }
-    };
-    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
-        @Override
-        public void migrate(@NonNull SupportSQLiteDatabase supportSQLiteDatabase) {
-            supportSQLiteDatabase.execSQL("ALTER TABLE BUCKETLIST ADD COLUMN status TEXT DEFAULT 'Pending'");
-        }
-    };
+//    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+//        @Override
+//        public void migrate(@NonNull SupportSQLiteDatabase supportSQLiteDatabase) {
+//            supportSQLiteDatabase.execSQL("ALTER TABLE CATEGORY ADD COLUMN imageCategory TEXT");
+//        }
+//    };
+//    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+//        @Override
+//        public void migrate(@NonNull SupportSQLiteDatabase supportSQLiteDatabase) {
+//            supportSQLiteDatabase.execSQL("ALTER TABLE BUCKETLIST ADD COLUMN status TEXT DEFAULT 'Pending'");
+//        }
+//    };
 
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
     public static BucketListRoomDatabase getDatabase(final Context context){
@@ -79,7 +79,7 @@ public abstract class BucketListRoomDatabase extends RoomDatabase{
         BucketListRoomDatabase.databaseWriteExecutor.execute(()->{
             UserDAO userDAO = instance.userDAO();
             //create new user
-            userDAO.insert(new User("abc@ait.com", "12121212","admin","admin",new Date() ));
+            Long userId = userDAO.insert(new User("abc@ait.com", "12121212","admin","admin",new Date() ));
             User user1 = userDAO.findByEmail("abc@ait.com");
 
 
@@ -97,13 +97,13 @@ public abstract class BucketListRoomDatabase extends RoomDatabase{
 
             BucketListItemDAO bucketListItemDao = instance.bucketListItemDAO();
             //insert new item
-            BucketListItem bucketListItem1 = new BucketListItem("Japan","cherry blossom in japan",new Date(), "pending", 33.3, 3, category1.getId());
+            BucketListItem bucketListItem1 = new BucketListItem("Japan","cherry blossom in japan",new Date(), "pending", 33.3, 3, categoryId1.intValue(), user1.getId());
             Long bucketListItem1Id = bucketListItemDao.insert(bucketListItem1);
 
-            BucketListItem bucketListItem2 = new BucketListItem("Japan","cherry blossom in japan",new Date(), "pending", 33.3, 3, 1);
+            BucketListItem bucketListItem2 = new BucketListItem("USA","cherry blossom in Usa",new Date(), "pending", 33.3, 3, categoryId1.intValue(), user1.getId());
             Long bucketListItem2Id = bucketListItemDao.insert(bucketListItem2);
-            BucketListItem bucketListItem3 = new BucketListItem("Japan","cherry blossom in japan",new Date(), "pending", 33.3, 3, 2);
-            Long bucketListItem3Id = bucketListItemDao.insert(bucketListItem2);
+            BucketListItem bucketListItem3 = new BucketListItem("South Korea","cherry blossom in Korea",new Date(), "pending", 33.3, 3, categoryId2.intValue(), user1.getId());
+            Long bucketListItem3Id = bucketListItemDao.insert(bucketListItem3);
 
         });
 

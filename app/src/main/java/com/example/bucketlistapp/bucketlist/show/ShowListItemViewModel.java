@@ -14,15 +14,23 @@ import java.util.List;
 public class ShowListItemViewModel  extends AndroidViewModel {
     private BucketListRepository bucketListRepository;
     private LiveData<List<BucketListItem>>allListItems;
+
+
     public ShowListItemViewModel(@NonNull Application application) {
         super(application);
         bucketListRepository = new BucketListRepository(application);
         allListItems = bucketListRepository.getAllListItems();
+
+
     }
     public BucketListItem find(Integer categoryId) {
         return bucketListRepository.findItemByCategoryId(categoryId);
     }
     public LiveData<List<BucketListItem>>getAllListItems(){
         return allListItems;
+    }
+
+    public LiveData<List<BucketListItem>> findByUserIdAndCategoryId(Long userId, Long categoryId){
+        return bucketListRepository.findByUserIdAndCategoryId(userId, categoryId);
     }
 }

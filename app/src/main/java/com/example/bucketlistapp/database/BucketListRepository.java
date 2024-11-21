@@ -25,6 +25,9 @@ public class BucketListRepository {
     private BucketListItem bucketListItem;
     private LiveData<List<BucketListItem>>allListItems;
     private LiveData<List<Category>>categoryTitles;
+    private Long bucketListItemId ;
+    private Long categoryId;
+    private Long userId;
 
     public BucketListRepository(Application application) {
         BucketListRoomDatabase db = BucketListRoomDatabase.getDatabase(application);
@@ -36,10 +39,23 @@ public class BucketListRepository {
 
     }
     //method to deal with users
-    public  void insert(User user){
-        BucketListRoomDatabase.databaseWriteExecutor.execute(()->{
-            userDAO.insert(user);
-                });
+    public  Long insert(User myUser){
+//        BucketListRoomDatabase.databaseWriteExecutor.execute(()->{
+//            userDAO.insert(user);
+//                });
+        Callable <Long> c = ()-> {
+            return userDAO.insert(myUser);
+        };
+
+        Future<Long> future = BucketListRoomDatabase.databaseWriteExecutor.submit(c);
+        try {
+            userId = future.get();
+        }
+        catch (ExecutionException |InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return userId;
+
     }
     public void delete(User user){
         BucketListRoomDatabase.databaseWriteExecutor.execute(()->{
@@ -82,11 +98,24 @@ public class BucketListRepository {
     public LiveData<List<Category>>getCategoryTitles(){
         return categoryTitles;
     }
-    public void insert(Category category){
-        BucketListRoomDatabase.databaseWriteExecutor.execute(()->{
-            categoryDAO.insert(category);
-           // CategoryDAO.insert(category);
-        });
+
+    public Long insert(Category myCategory){
+//        BucketListRoomDatabase.databaseWriteExecutor.execute(()->{
+//            categoryDAO.insert(category);
+//
+//        });
+        Callable <Long> c = ()-> {
+            return categoryDAO.insert(myCategory);
+        };
+
+        Future<Long> future = BucketListRoomDatabase.databaseWriteExecutor.submit(c);
+        try {
+            categoryId = future.get();
+        }
+        catch (ExecutionException |InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return categoryId;
     }
     public void delete(Category category){
         BucketListRoomDatabase.databaseWriteExecutor.execute(()->{
@@ -117,11 +146,23 @@ public class BucketListRepository {
         return allListItems;
     }
 
-    public void insert(BucketListItem bucketListItem){
-        BucketListRoomDatabase.databaseWriteExecutor.execute(()->{
-            bucketListItemDAO.insert(bucketListItem);
-            // CategoryDAO.insert(category);
-        });
+    public Long insert(BucketListItem item){
+//        BucketListRoomDatabase.databaseWriteExecutor.execute(()->{
+//            bucketListItemDAO.insert(item);
+//        });
+
+        Callable <Long> c = ()-> {
+            return bucketListItemDAO.insert(item);
+        };
+
+        Future<Long> future = BucketListRoomDatabase.databaseWriteExecutor.submit(c);
+        try {
+            bucketListItemId = future.get();
+        }
+        catch (ExecutionException |InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return bucketListItemId;
     }
     public void delete(BucketListItem bucketListItem){
         BucketListRoomDatabase.databaseWriteExecutor.execute(()->{
@@ -161,5 +202,9 @@ public class BucketListRepository {
         return bucketListItem;
     }
 
+
+    public LiveData<List<BucketListItem>> findByUserIdAndCategoryId(Long userId, Long categoryId){
+        return bucketListItemDAO.findByUserIdAndCategoryId(userId, categoryId);
+    }
 
 }
