@@ -20,7 +20,6 @@ import android.widget.Spinner;
 import com.example.bucketlistapp.R;
 import com.example.bucketlistapp.bucketlist.BucketListItem;
 import com.example.bucketlistapp.databinding.AddListFragmentBinding;
-import com.example.bucketlistapp.login.LoginViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Date;
@@ -58,7 +57,6 @@ public class AddListFragment extends Fragment {
         //code using UI
 
         mViewModel = new ViewModelProvider(this).get(AddListFragmentViewModel.class);
-        LoginViewModel loginViewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
 
         //populate the spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -131,22 +129,30 @@ public class AddListFragment extends Fragment {
                     Snackbar.make(view, "Invalid budget value", Snackbar.LENGTH_LONG).show();
                     return;
                 }
+                bucketListItem.setId(1);
                 bucketListItem.setBudget(budget);
-
-                BucketListItem bucketListItem = new BucketListItem();
-//                bucketListItem.setId(1);
-                bucketListItem.setTitle(title);
-                bucketListItem.setDescription(description);
-                bucketListItem.setBudget(budget);
-                bucketListItem.setStatus(status);
                 bucketListItem.setPriorityLvl(priorityLvl);
                 bucketListItem.setLastUpdated(new Date(System.currentTimeMillis()));
-                bucketListItem.setCategoryId(1);//TODO: get this from a bundle (passed)
-                bucketListItem.setUserId(loginViewModel.getLoggedInUser().getId());
+                bucketListItem.setCategoryId(1);
 
                 mViewModel.insert(bucketListItem);
+
                 NavController navController = Navigation.findNavController(view);
                 navController.navigateUp();
+
+//                BucketListItem bucketListItem = new BucketListItem();
+//                bucketListItem.setId(1);
+//                bucketListItem.setTitle(title);
+//                bucketListItem.setDescription(description);
+//                bucketListItem.setBudget(budget);
+//                bucketListItem.setStatus(status);
+//                bucketListItem.setPriorityLvl(priorityLvl);
+//                bucketListItem.setLastUpdated(new Date(System.currentTimeMillis()));
+//                bucketListItem.setCategoryId(1);
+
+
+//                NavController navController = Navigation.findNavController(view);
+//                navController.navigateUp();
             }
         });
         binding.cancelListItemButton.setOnClickListener(new View.OnClickListener() {
