@@ -57,6 +57,7 @@ public class AddCategoryFragment extends Fragment {
                     return;
                 }
                 category.setCategoryName(categoryName);
+                category.setImageCategory("");
 
                 mViewModel.insert(category);
                 NavController navController = Navigation.findNavController(view);
