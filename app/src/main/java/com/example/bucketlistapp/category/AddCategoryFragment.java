@@ -73,4 +73,7 @@ public class AddCategoryFragment extends Fragment {
             }
         });
     }
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 }

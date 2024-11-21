@@ -129,21 +129,30 @@ public class AddListFragment extends Fragment {
                     Snackbar.make(view, "Invalid budget value", Snackbar.LENGTH_LONG).show();
                     return;
                 }
-                bucketListItem.setBudget(budget);
-
-                BucketListItem bucketListItem = new BucketListItem();
                 bucketListItem.setId(1);
-                bucketListItem.setTitle(title);
-                bucketListItem.setDescription(description);
                 bucketListItem.setBudget(budget);
-                bucketListItem.setStatus(status);
                 bucketListItem.setPriorityLvl(priorityLvl);
                 bucketListItem.setLastUpdated(new Date(System.currentTimeMillis()));
                 bucketListItem.setCategoryId(1);
 
                 mViewModel.insert(bucketListItem);
+
                 NavController navController = Navigation.findNavController(view);
                 navController.navigateUp();
+
+//                BucketListItem bucketListItem = new BucketListItem();
+//                bucketListItem.setId(1);
+//                bucketListItem.setTitle(title);
+//                bucketListItem.setDescription(description);
+//                bucketListItem.setBudget(budget);
+//                bucketListItem.setStatus(status);
+//                bucketListItem.setPriorityLvl(priorityLvl);
+//                bucketListItem.setLastUpdated(new Date(System.currentTimeMillis()));
+//                bucketListItem.setCategoryId(1);
+
+
+//                NavController navController = Navigation.findNavController(view);
+//                navController.navigateUp();
             }
         });
         binding.cancelListItemButton.setOnClickListener(new View.OnClickListener() {
