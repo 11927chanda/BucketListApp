@@ -33,4 +33,6 @@ public class ShowListItemViewModel  extends AndroidViewModel {
     public LiveData<List<BucketListItem>> findByUserIdAndCategoryId(Long userId, Long categoryId){
         return bucketListRepository.findByUserIdAndCategoryId(userId, categoryId);
     }
+
+
 }

@@ -26,6 +26,7 @@ public class AddCategoryFragment extends Fragment {
     private AddCategoryViewModel mViewModel;
     private AddCategoryFragmentBinding binding;
 
+
     private ShowCategoryViewModel showCategoryViewModel;
 
     public static AddCategoryFragment newInstance() {
@@ -44,6 +45,8 @@ public class AddCategoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         AddCategoryViewModel mViewModel = new ViewModelProvider(this).get(AddCategoryViewModel.class);
+
+
 
         //getting data from UI if it exists
         Category category = mViewModel.getCategory();

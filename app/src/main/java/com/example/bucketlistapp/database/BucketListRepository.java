@@ -222,4 +222,7 @@ public class BucketListRepository {
         return bucketListItemDAO.findByUserIdAndCategoryId(userId, categoryId);
     }
 
+    public Category findItemByCategoryId(Integer categoryId) {
+        return categoryDAO.findById(categoryId);
+    }
 }
