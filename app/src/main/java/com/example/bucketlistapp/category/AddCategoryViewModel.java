@@ -11,6 +11,8 @@ public class AddCategoryViewModel extends AndroidViewModel {
 
     private final BucketListRepository bucketListRepository;
     private Category category;
+    private Category selectedCategory;
+
     public AddCategoryViewModel(@NonNull Application application) {
         super(application);
         //
@@ -31,4 +33,9 @@ public class AddCategoryViewModel extends AndroidViewModel {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+    public Category getSelectedCategory(){
+        return selectedCategory;
+    }
+
 }

@@ -15,14 +15,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bucketlistapp.R;
+import com.example.bucketlistapp.ShowCategoryViewModel;
 import com.example.bucketlistapp.category.Category;
 import com.example.bucketlistapp.databinding.AddCategoryFragmentBinding;
+import com.example.bucketlistapp.databinding.ShowListFragmentBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 
 public class AddCategoryFragment extends Fragment {
     private AddCategoryViewModel mViewModel;
     private AddCategoryFragmentBinding binding;
+
+    private ShowCategoryViewModel showCategoryViewModel;
 
     public static AddCategoryFragment newInstance() {
         return new AddCategoryFragment() ;

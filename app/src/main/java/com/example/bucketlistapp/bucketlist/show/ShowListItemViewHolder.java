@@ -18,5 +18,7 @@ public class ShowListItemViewHolder extends RecyclerView.ViewHolder {
         this.binding.showStatusTextView.setText(bucketListItem.getStatus());
         this.binding.priorityDiscreteSlider.setValue(bucketListItem.getPriorityLvl());
         this.binding.priorityLvlTextView.setText(bucketListItem.getPriorityLvl().toString());
+
     }
+
 }

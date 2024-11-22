@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_mainFragment_to_addCategoryFragment"
             app:destination="@id/addCategoryFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -64,4 +67,13 @@
         android:name="com.example.bucketlistapp.category.AddCategoryFragment"
         android:label="add_category_fragment"
         tools:layout="@layout/add_category_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.bucketlistapp.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

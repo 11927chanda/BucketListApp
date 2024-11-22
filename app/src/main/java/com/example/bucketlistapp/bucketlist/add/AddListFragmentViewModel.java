@@ -17,6 +17,8 @@ public class AddListFragmentViewModel extends AndroidViewModel {
     private final BucketListRepository bucketListRepository;
     private BucketListItem bucketListItem;
 
+
+
 //    public AddListFragmentViewModel(@NonNull Application application, BucketListRepository bucketListRepository, BucketListRepository bucketListRepository1, BucketListRepository bucketListRepository2) {
     public AddListFragmentViewModel(@NonNull Application application)  {
         super(application);
@@ -31,7 +33,7 @@ public class AddListFragmentViewModel extends AndroidViewModel {
         bucketListItem.setStatus("");
         bucketListItem.setPriorityLvl(1);
         bucketListItem.setLastUpdated(new Date(System.currentTimeMillis()));
-        bucketListItem.setCategoryId(1);
+        //bucketListItem.setCategoryId(1);
 
     }
     public void insert(BucketListItem bucketListItem){

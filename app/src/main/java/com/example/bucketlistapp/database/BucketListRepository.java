@@ -142,6 +142,21 @@ public class BucketListRepository {
         return category;
     }
 
+    public Category findByCategoryTitle(String categoryName){
+        Callable <Category> c = ()-> {
+            return categoryDAO.findByCategoryTitle(categoryName);
+        };
+
+        Future<Category> future = BucketListRoomDatabase.databaseWriteExecutor.submit(c);
+        try {
+            category = future.get();
+        }
+        catch (ExecutionException |InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return category;
+    }
+
     public LiveData<List<BucketListItem>>getAllListItems(){
         return allListItems;
     }
@@ -188,19 +203,19 @@ public class BucketListRepository {
         }
         return bucketListItem;
     }
-    public BucketListItem findItemByCategoryId(int categoryId){
-        Callable<BucketListItem> c = ()->{
-            return bucketListItemDAO.findByCategoryId(categoryId);
-        };
-        Future<BucketListItem> future = BucketListRoomDatabase.databaseWriteExecutor.submit(c);
-        try {
-            bucketListItem = future.get();
-        }
-        catch (ExecutionException |InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        return bucketListItem;
-    }
+//    public BucketListItem findItemByCategoryId(int categoryId){
+//        Callable<BucketListItem> c = ()->{
+//            return bucketListItemDAO.findByCategoryId(categoryId);
+//        };
+//        Future<BucketListItem> future = BucketListRoomDatabase.databaseWriteExecutor.submit(c);
+//        try {
+//            bucketListItem = future.get();
+//        }
+//        catch (ExecutionException |InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return bucketListItem;
+//    }
 
 
     public LiveData<List<BucketListItem>> findByUserIdAndCategoryId(Long userId, Long categoryId){

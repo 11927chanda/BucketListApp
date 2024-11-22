@@ -19,6 +19,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
     public CategoryViewHolder(@NonNull CategoryRecyclerViewItemBinding binding) {
         super(binding.getRoot());
         this.binding = binding;
+
     }
 
     public void update(Category category){
@@ -42,7 +43,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
 
             @Override
             public boolean onLongClick(View v) {
-                binding.categoryMaterialCardview.setChecked(binding.categoryMaterialCardview.isChecked());
+                binding.categoryMaterialCardview.setChecked(!binding.categoryMaterialCardview.isChecked());
                 return true;
 
             }
@@ -53,6 +54,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("BUCKETLIST", category);
+
 
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_mainFragment_to_showListFragment, bundle);
@@ -69,5 +71,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
                 navController.navigate(R.id.action_mainFragment_to_showListFragment, bundle);
             }
         });
+
+
     }
 }

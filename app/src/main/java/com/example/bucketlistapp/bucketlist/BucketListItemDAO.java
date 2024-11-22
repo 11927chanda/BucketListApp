@@ -34,6 +34,4 @@ public interface BucketListItemDAO {
     @Query("SELECT * FROM `BUCKETLIST` WHERE TITLE= :title")
     BucketListItem findByTitle(String title);
 
-    @Query("SELECT * FROM `BUCKETLIST` WHERE CATEGORY_ID= :categoryId")
-    BucketListItem findByCategoryId(int categoryId);
 }

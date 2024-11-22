@@ -18,8 +18,12 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 
 import com.example.bucketlistapp.R;
+import com.example.bucketlistapp.ShowCategoryViewModel;
 import com.example.bucketlistapp.bucketlist.BucketListItem;
+import com.example.bucketlistapp.category.AddCategoryViewModel;
+import com.example.bucketlistapp.category.Category;
 import com.example.bucketlistapp.databinding.AddListFragmentBinding;
+import com.example.bucketlistapp.login.LoginViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Date;
@@ -30,6 +34,7 @@ public class AddListFragment extends Fragment {
     private AddListFragmentBinding binding;
     private Integer priorityLvl = 0;
     private Spinner statusSpinner ;
+     private  Category category;
 
 
     public static AddListFragment newInstance() {
@@ -55,8 +60,17 @@ public class AddListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //code using UI
-
         mViewModel = new ViewModelProvider(this).get(AddListFragmentViewModel.class);
+        LoginViewModel loginViewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
+   //     ShowCategoryViewModel showCategoryViewModel = new ViewModelProvider(requireActivity()).get(ShowCategoryViewModel.class);
+        //for category
+        AddCategoryViewModel addCategoryViewModel = new ViewModelProvider(requireActivity()).get(AddCategoryViewModel.class);
+
+        Bundle bundle =getArguments();
+        if(bundle !=null && bundle.containsKey("CATEGORY")){
+            category = (Category)bundle.getSerializable("CATEGORY");
+        }
+
 
         //populate the spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -102,20 +116,17 @@ public class AddListFragment extends Fragment {
                     Snackbar.make(view, "Title cannot be blank", Snackbar.LENGTH_LONG).show();
                     return;
                 }
-                bucketListItem.setTitle(title);
 
                 String description = binding.addDiscriptionTIL.getEditText().getText().toString();
                 if (description.isBlank()) {
                     Snackbar.make(view, "Description cannot be blank", Snackbar.LENGTH_LONG).show();
                     return;
                 }
-                bucketListItem.setDescription(description);
                 String status = binding.StatusSpinner.getSelectedItem().toString();
                 if (status.isBlank()) {
                     Snackbar.make(view, "Status cannot be blank", Snackbar.LENGTH_LONG).show();
                     return;
                 }
-                bucketListItem.setStatus(status);
                 String budgetString = binding.addBudgetTIL.getEditText().getText().toString();
                 if (budgetString.isBlank()) {
                     Snackbar.make(view, "Budget cannot be blank", Snackbar.LENGTH_LONG).show();
@@ -129,30 +140,24 @@ public class AddListFragment extends Fragment {
                     Snackbar.make(view, "Invalid budget value", Snackbar.LENGTH_LONG).show();
                     return;
                 }
-                bucketListItem.setId(1);
+                BucketListItem bucketListItem = new BucketListItem();
+              //  bucketListItem.setId(1);
+                bucketListItem.setTitle(title);
+                bucketListItem.setDescription(description);
                 bucketListItem.setBudget(budget);
+                bucketListItem.setStatus(status);
                 bucketListItem.setPriorityLvl(priorityLvl);
                 bucketListItem.setLastUpdated(new Date(System.currentTimeMillis()));
-                bucketListItem.setCategoryId(1);
+//                bucketListItem.setCategoryId(1); ////TODO: get this from a bundle (passed)
+                bucketListItem.setUserId(loginViewModel.getLoggedInUser().getId());
+                bucketListItem.setCategoryId(category.getId());
+
 
                 mViewModel.insert(bucketListItem);
 
+
                 NavController navController = Navigation.findNavController(view);
                 navController.navigateUp();
-
-//                BucketListItem bucketListItem = new BucketListItem();
-//                bucketListItem.setId(1);
-//                bucketListItem.setTitle(title);
-//                bucketListItem.setDescription(description);
-//                bucketListItem.setBudget(budget);
-//                bucketListItem.setStatus(status);
-//                bucketListItem.setPriorityLvl(priorityLvl);
-//                bucketListItem.setLastUpdated(new Date(System.currentTimeMillis()));
-//                bucketListItem.setCategoryId(1);
-
-
-//                NavController navController = Navigation.findNavController(view);
-//                navController.navigateUp();
             }
         });
         binding.cancelListItemButton.setOnClickListener(new View.OnClickListener() {

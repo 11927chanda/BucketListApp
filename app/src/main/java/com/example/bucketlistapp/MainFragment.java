@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 
+import com.example.bucketlistapp.category.AddCategoryViewModel;
 import com.example.bucketlistapp.category.Category;
 import com.example.bucketlistapp.category.OnCategoryClickListener;
 import com.example.bucketlistapp.databinding.MainFragmentBinding;
@@ -27,6 +28,7 @@ import java.util.List;
 public class MainFragment extends Fragment implements OnCategoryClickListener {
 
     private ShowCategoryViewModel showCategoryViewModel;
+    private AddCategoryViewModel addCategoryViewModel;
     private MainFragmentBinding binding;
 
     public static MainFragment newInstance() {
@@ -62,6 +64,7 @@ public class MainFragment extends Fragment implements OnCategoryClickListener {
         binding.addCategoryFButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_mainFragment_to_addCategoryFragment);
             }
@@ -69,11 +72,11 @@ public class MainFragment extends Fragment implements OnCategoryClickListener {
 
         //for navigating to list as clicking on category card is not working
 
-        binding.showListButton.setOnClickListener(new View.OnClickListener() {
+        binding.profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_mainFragment_to_showListFragment);
+                navController.navigate(R.id.action_mainFragment_to_profileFragment);
             }
         });
 
@@ -103,5 +106,7 @@ public class MainFragment extends Fragment implements OnCategoryClickListener {
     @Override
     public void onClick(Category category, View view) {
         //code here whenever clicked for particular category
+
+
     }
 }

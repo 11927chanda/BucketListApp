@@ -59,9 +59,13 @@ public class ShowListFragment extends Fragment {
         Bundle bundle = getArguments();
         if(bundle != null && bundle.containsKey("BUCKETLIST")){
             //yoy know the fragment has been opened
-            category = (Category) bundle.get("BUCKETLIST");
+            category = bundle.getSerializable("BUCKETLIST",Category.class);
+           // category = (Category) bundle.get("BUCKETLIST", Category.class);
+            //BucketListItem bucketListItem = showListItemViewModel.find(category.getId());
+//            if (bucketListItem != null) {
+//
+//            }
 
-            BucketListItem bucketListItem = showListItemViewModel.find(category.getId());
             //for the bucket list item
             binding.headingTextView.setText(category.getCategoryName());
 
