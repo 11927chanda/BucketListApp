@@ -21,4 +21,5 @@ public class ShowListItemViewHolder extends RecyclerView.ViewHolder {
 
     }
 
+
 }

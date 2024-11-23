@@ -1,5 +1,6 @@
 package com.example.bucketlistapp.bucketlist.show;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,7 +10,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +35,7 @@ public class ShowListFragment extends Fragment {
     private ShowListFragmentBinding binding;
     private Category category;
     private ShowCategoryViewModel showCategoryViewModel;
+    private ShowListItemViewAdapter adapter;
 
     public static ShowListFragment newInstance() {
 
@@ -60,21 +64,19 @@ public class ShowListFragment extends Fragment {
         if(bundle != null && bundle.containsKey("BUCKETLIST")){
             //yoy know the fragment has been opened
             category = bundle.getSerializable("BUCKETLIST",Category.class);
-           // category = (Category) bundle.get("BUCKETLIST", Category.class);
-            //BucketListItem bucketListItem = showListItemViewModel.find(category.getId());
-//            if (bucketListItem != null) {
-//
-//            }
-
-            //for the bucket list item
             binding.headingTextView.setText(category.getCategoryName());
 
         }
 
         //navigate to add List fragment
         binding.addNewItemFAB.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("BUCKETLIST", category);
+
                 NavController navController = Navigation.findNavController(view);
                 navController.navigate(R.id.action_showListFragment_to_addListFragment);
             }
@@ -83,7 +85,8 @@ public class ShowListFragment extends Fragment {
         binding.showListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.showListRecyclerView.setHasFixedSize(true);
         //create adapter
-        ShowListItemViewAdapter adapter = new ShowListItemViewAdapter();
+//        ShowListItemViewAdapter adapter = new ShowListItemViewAdapter();
+        adapter = new ShowListItemViewAdapter();
         //set it to recyclerView
         binding.showListRecyclerView.setAdapter(adapter);
         //get an observer and set it
@@ -96,8 +99,40 @@ public class ShowListFragment extends Fragment {
         //make LiveData observer for changes
 //        showListItemViewModel.getAllListItems().observe(getViewLifecycleOwner(), allBucketListItemObserver);
         showListItemViewModel.findByUserIdAndCategoryId(Long.valueOf(loginViewModel.getLoggedInUser().getId()), Long.valueOf(category.getId())).observe(getViewLifecycleOwner(), allBucketListItemObserver);
-    }
 
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                BucketListItem bucketListItem = adapter.getCurrentList().get(position);
+                showDeleteConfirmationDialogue(bucketListItem, position);
+
+            }
+        };
+        //for deleting item from list
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(binding.showListRecyclerView);
+    }
+    //confirmation dialogue
+
+    private void showDeleteConfirmationDialogue(BucketListItem bucketListItem, int position){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("Are you sure you want to delete this item?");
+        builder.setPositiveButton("Delete",(dialogue, which)->{
+            showListItemViewModel.delete(bucketListItem);
+            adapter.removeBucketlistItem(position);
+        });
+        builder.setNegativeButton("Cancel",(dialog, which) -> {
+            adapter.notifyItemChanged(position);
+            dialog.dismiss();
+        });
+        builder.create().show();
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

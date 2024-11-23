@@ -50,5 +50,8 @@ public class CategoryRecyclerViewAdapter extends ListAdapter<Category, CategoryV
         Category category = getItem(position);
         holder.update(category);
         holder.bind(category,onCategoryClickListener);
+
+        //new
+        holder.itemView.setOnClickListener(v -> onCategoryClickListener.onCategoryClick(category.getId()));
     }
 }

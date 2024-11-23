@@ -148,10 +148,12 @@ public class AddListFragment extends Fragment {
 
                     Bundle bundle = getArguments();
                     if (bundle != null && bundle.containsKey("CATEGORY")) {
-                        category = (Category) bundle.getSerializable("CATEGORY", Category.class);
+                        category = bundle.getSerializable("CATEGORY", Category.class);
 //
 //                     bucketListItem = showListItemViewModel.find(category.getId());
                         //  bucketListItem.setCategoryId(category.getId());
+                       // bucketListItem.setCategoryId(addCategoryViewModel.getCategory().getId());
+                        //bucketListItem.setCategoryId(category.getId());
                         bucketListItem.setCategoryId(addCategoryViewModel.getCategory().getId());
                     }
 

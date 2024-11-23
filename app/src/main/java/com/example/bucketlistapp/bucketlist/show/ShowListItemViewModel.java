@@ -34,5 +34,9 @@ public class ShowListItemViewModel  extends AndroidViewModel {
         return bucketListRepository.findByUserIdAndCategoryId(userId, categoryId);
     }
 
+    public void delete(BucketListItem bucketListItem){
+        bucketListRepository.delete(bucketListItem);
+    }
+
 
 }

@@ -5,4 +5,6 @@ import android.view.View;
 public interface OnCategoryClickListener {
 
     void onClick(Category category, View view);
+
+    void onCategoryClick(Integer id);
 }

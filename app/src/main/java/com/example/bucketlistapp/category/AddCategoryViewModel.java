@@ -37,5 +37,9 @@ public class AddCategoryViewModel extends AndroidViewModel {
     public Category getSelectedCategory(){
         return selectedCategory;
     }
+    public Category findCategoryById(int id){
+        return bucketListRepository.findCategoryById(id);
+
+    }
 
 }

@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.ListAdapter;
 import com.example.bucketlistapp.bucketlist.BucketListItem;
 import com.example.bucketlistapp.databinding.ShowBucketlistItemRecyclerViewItemBinding;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ShowListItemViewAdapter extends ListAdapter<BucketListItem, ShowListItemViewHolder> {
 
     private ShowBucketlistItemRecyclerViewItemBinding binding;
@@ -31,8 +34,8 @@ public class ShowListItemViewAdapter extends ListAdapter<BucketListItem, ShowLis
                     oldItem.getStatus().equals(newItem.getStatus())&&
                     oldItem.getBudget().equals(newItem.getBudget())&&
                     oldItem.getLastUpdated().equals(newItem.getLastUpdated())&&
-                    oldItem.getPriorityLvl().equals(newItem.getPriorityLvl())&&
-                    oldItem.getCategoryId().equals(newItem.getCategoryId());
+                    oldItem.getPriorityLvl().equals(newItem.getPriorityLvl());
+                   // oldItem.getCategoryId().equals(newItem.getCategoryId());
         }
     };
     @NonNull
@@ -49,5 +52,11 @@ public class ShowListItemViewAdapter extends ListAdapter<BucketListItem, ShowLis
     public void onBindViewHolder(@NonNull ShowListItemViewHolder holder, int position) {
         BucketListItem bucketListItem = getItem(position);
         holder.update(bucketListItem);
+    }
+    //for deleting item from list
+    public void removeBucketlistItem(int position){
+        List<BucketListItem> currentList = new ArrayList<>(getCurrentList());
+        currentList.remove(position);
+        submitList(currentList);
     }
 }

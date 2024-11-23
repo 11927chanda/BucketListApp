@@ -96,6 +96,9 @@ public class MainFragment extends Fragment implements OnCategoryClickListener {
             }
         };
 
+        //new
+
+
 
 
         //make LiveData observer for changes
@@ -107,6 +110,18 @@ public class MainFragment extends Fragment implements OnCategoryClickListener {
     public void onClick(Category category, View view) {
         //code here whenever clicked for particular category
 
+
+    }
+
+    //new
+    @Override
+    public void onCategoryClick(Integer id) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("CATEGORY_ID", id);
+
+        //Navigate
+        NavController navController = Navigation.findNavController(requireView());
+        navController.navigate(R.id.action_mainFragment_to_showListFragment);
 
     }
 }
