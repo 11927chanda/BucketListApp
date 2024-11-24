@@ -16,9 +16,11 @@ import java.util.List;
 public class ShowListItemViewAdapter extends ListAdapter<BucketListItem, ShowListItemViewHolder> {
 
     private ShowBucketlistItemRecyclerViewItemBinding binding;
+    private OnItemClickListner onItemClickListner;
 
-    public ShowListItemViewAdapter(){
+    public ShowListItemViewAdapter(OnItemClickListner onItemClickListner){
         super(DIFF_CALLBACK);
+        this.onItemClickListner = onItemClickListner;
     }
 
     private static final DiffUtil.ItemCallback<BucketListItem> DIFF_CALLBACK = new DiffUtil.ItemCallback<BucketListItem>() {
@@ -52,6 +54,7 @@ public class ShowListItemViewAdapter extends ListAdapter<BucketListItem, ShowLis
     public void onBindViewHolder(@NonNull ShowListItemViewHolder holder, int position) {
         BucketListItem bucketListItem = getItem(position);
         holder.update(bucketListItem);
+        holder.bind(bucketListItem, onItemClickListner);
     }
     //for deleting item from list
     public void removeBucketlistItem(int position){

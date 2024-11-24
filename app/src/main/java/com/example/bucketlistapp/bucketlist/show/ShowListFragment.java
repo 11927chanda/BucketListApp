@@ -28,7 +28,7 @@ import com.example.bucketlistapp.login.LoginViewModel;
 import java.util.List;
 
 
-public class ShowListFragment extends Fragment {
+public class ShowListFragment extends Fragment implements OnItemClickListner {
 
     private ShowListItemViewModel showListItemViewModel;
 
@@ -78,7 +78,7 @@ public class ShowListFragment extends Fragment {
                 bundle.putSerializable("BUCKETLIST", category);
 
                 NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.action_showListFragment_to_addListFragment);
+                navController.navigate(R.id.action_showListFragment_to_addListFragment,bundle);
             }
         });
         //Recycler view
@@ -86,7 +86,7 @@ public class ShowListFragment extends Fragment {
         binding.showListRecyclerView.setHasFixedSize(true);
         //create adapter
 //        ShowListItemViewAdapter adapter = new ShowListItemViewAdapter();
-        adapter = new ShowListItemViewAdapter();
+        adapter = new ShowListItemViewAdapter(this);
         //set it to recyclerView
         binding.showListRecyclerView.setAdapter(adapter);
         //get an observer and set it
@@ -137,5 +137,10 @@ public class ShowListFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onClick(BucketListItem bucketListItem, View view) {
+        //code here when an item is clicked
     }
 }

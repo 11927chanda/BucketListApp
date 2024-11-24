@@ -184,10 +184,24 @@ public class BucketListRepository {
             bucketListItemDAO.delete(bucketListItem);
         });
     }
-    public void update(BucketListItem category){
+    public void update(BucketListItem bucketListItem){
         BucketListRoomDatabase.databaseWriteExecutor.execute(()->{
             bucketListItemDAO.update(bucketListItem);
-        });
+            //asynchronous
+//            Callable <Long> c = ()-> {
+//                return bucketListItemDAO.update(item);
+//            };
+//
+//            Future<Long> future = BucketListRoomDatabase.databaseWriteExecutor.submit(c);
+//            try {
+//                item = future.get();
+//            }
+//            catch (ExecutionException |InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//            return item;
+//
+      });
     }
     public BucketListItem findItemById(int id){
         Callable <BucketListItem> c = ()-> {

@@ -47,5 +47,11 @@ public class AddListFragmentViewModel extends AndroidViewModel {
     public void setBucketListItem(BucketListItem bucketListItem) {
         this.bucketListItem = bucketListItem;
     }
+    public void update(BucketListItem bucketListItem){
+        bucketListRepository.update(bucketListItem);
+    }
+    public BucketListItem find(Integer id ){
+        return bucketListRepository.findItemById(id);
+    }
 
 }

@@ -85,7 +85,7 @@ public abstract class BucketListRoomDatabase extends RoomDatabase{
 
             CategoryDAO categoryDAO =instance.categoryDAO();
             //insert new category
-            Category category1= new Category("Travel","travel.jpg");
+            Category category1= new Category("Travel","");
             Long categoryId1 =categoryDAO.insert(category1);
             Category category2= new Category("Adventure","");
             Long categoryId2 =categoryDAO.insert(category2);
